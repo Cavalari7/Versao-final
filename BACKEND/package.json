@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/geocodificar.test.mjs && node tests/google.test.mjs && node tests/rota.test.mjs && node tests/smoke.mjs && node tests/auth.test.mjs",
+    "test": "node tests/geocodificar.test.mjs && node tests/google.test.mjs && node tests/rota.test.mjs && node tests/smoke.mjs && node tests/auth.test.mjs && node tests/termo.test.mjs",
     "dev": "nodemon app.js",
     "start": "node app.js"
   },

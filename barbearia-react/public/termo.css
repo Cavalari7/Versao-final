@@ -1,0 +1,631 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    --branco: #fff;
+    --amrelo-principal: #F2B705;
+    --amarelo-claro: #ffd60a;
+    --verde: #2FA84F;
+    --ambar: #B8700A;
+    --vidro: rgba(12, 9, 0, 0.55);
+    --borda-vidro: rgba(255, 255, 255, 0.18);
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    color: var(--branco);
+    background: #000;
+}
+
+/* ===== FUNDO FIXO (a gota fica parada, o conteúdo rola) ===== */
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("/imgs/bioleo-background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body::after{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* ================= NAVE BAR ================= */
+.nave-bar{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.nave-bar span{
+    position: relative;
+    display: inline-block;
+}
+
+.nave-bar span::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 9%;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--amrelo-principal);
+    border-radius: 2px;
+}
+
+.logo-titulo{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--branco);
+    text-decoration: none;
+}
+
+.logo-titulo h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.logo-titulo img{
+    width: 2rem;
+    margin-left: 4rem;
+}
+
+.navegacao{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navegacao a{
+    text-decoration: none;
+    color: var(--branco);
+    font-size: 0.9rem;
+}
+
+.navegacao a:last-child{
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: solid #fff 1px;
+    border-radius: 20px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 100;
+    transition: 0.3s;
+}
+
+.navegacao a:last-child:hover{
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    box-shadow: #fafafa 0px 0px 15px;
+}
+
+/* ================= SEÇÕES ================= */
+.secao{
+    padding: 3.5rem 6rem;
+    max-width: 78rem;
+}
+
+.titulo{
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.titulo::after{
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 4px;
+    margin-top: 0.8rem;
+    border-radius: 2px;
+    background: var(--amrelo-principal);
+}
+
+.secao p{
+    font-weight: 300;
+}
+
+/* ================= PAINEL DE VIDRO ================= */
+.painel{
+    background: var(--vidro);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--borda-vidro);
+    border-radius: 20px;
+    padding: 2rem 2.2rem;
+}
+
+.painel h4{
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+/* listas com marcador amarelo */
+.lista{
+    list-style: none;
+}
+
+.lista li{
+    position: relative;
+    padding-left: 1.4rem;
+    font-weight: 300;
+}
+
+.lista li + li{
+    margin-top: 0.7rem;
+}
+
+.lista li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amrelo-principal);
+}
+
+/* ================= BOTÕES ================= */
+.btn-amarelo{
+    text-decoration: none;
+    color: black;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.7rem 1.6rem;
+    border-radius: 20px;
+    border: #222222 solid 2px;
+    background: linear-gradient(90deg, #ffd60a 0%, #ffe66d 100%);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-amarelo:hover{
+    box-shadow: #F2B705 0px 0px 10px 5px;
+}
+
+.btn-vidro{
+    color: var(--branco);
+    font-family: inherit;
+    font-weight: 300;
+    padding: 0.7rem 1.6rem;
+    border-radius: 20px;
+    border: solid #fff 1px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-vidro:hover{
+    box-shadow: #fafafa 0px 0px 10px 5px;
+}
+
+/* ================= RODAPÉ ================= */
+.rodape{
+    padding: 3rem 6rem;
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--borda-vidro);
+}
+
+.rodape-colunas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 0;
+}
+
+.rodape-colunas > div{
+    padding: 0 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.rodape-colunas > div:first-child{
+    padding-left: 0;
+    border-left: none;
+}
+
+.rodape h4{
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.rodape p{
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+/* ================= TERMO ================= */
+.termo-layout{
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.selo{
+    display: inline-block;
+    padding: 0.5rem 1.4rem;
+    margin-bottom: 1.6rem;
+    border-radius: 20px;
+    background: var(--verde);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.termo-texto h2{
+    margin-bottom: 1.2rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    text-transform: uppercase;
+    color: var(--amarelo-claro);
+}
+
+.termo-texto > p{
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.termo-texto h4{
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* painel do app */
+.app-nome{
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 0.6rem;
+}
+
+.termo h3{
+    margin-bottom: 1rem;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.termo h3 span{
+    color: var(--amarelo-claro);
+}
+
+.rotulo{
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+.dados-termo{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 0;
+    margin-bottom: 1.6rem;
+}
+
+.dados-termo > div{
+    padding: 0 1.4rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.dados-termo > div:first-child{
+    padding-left: 0;
+    border-left: none;
+}
+
+.dados-termo strong{
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* as duas opções de aceite */
+.opcoes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.opcao{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.2rem;
+    border: 1px solid var(--borda-vidro);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.opcao p{
+    font-size: 0.8rem;
+}
+
+.opcao label{
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.etiqueta{
+    align-self: flex-start;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    background: var(--amrelo-principal);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.opcao input[type="text"]{
+    width: 100%;
+    height: 2.2rem;
+    padding-left: 0.6rem;
+    border: solid rgb(49, 48, 48) 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--branco);
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+
+.opcao input[type="text"]:focus{
+    outline: none;
+    border-color: var(--amrelo-principal);
+}
+
+/* assinatura */
+.assinatura{
+    position: relative;
+    height: 9rem;
+    border: 1px dashed var(--ambar);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.assinatura canvas{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.linha-assinatura{
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: 1.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+}
+
+.assinatura small{
+    position: absolute;
+    left: 0.7rem;
+    bottom: 0.4rem;
+    font-size: 0.6rem;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* termos */
+.termos-texto{
+    height: 9rem;
+    overflow: auto;
+    padding: 0.8rem;
+    border: 1px solid var(--borda-vidro);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.termos-texto strong{
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.concordo{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--ambar);
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.concordo input{
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--amrelo-principal);
+}
+
+.botoes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.botoes .btn-amarelo{
+    flex: 1;
+    font-size: 0.75rem;
+    padding: 0.6rem 1rem;
+}
+
+.botoes .btn-vidro{
+    font-size: 0.75rem;
+    padding: 0.6rem 1.2rem;
+}
+
+/* aviso depois de confirmar */
+.aviso{
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translate(-50%, 8rem);
+    max-width: 90%;
+    padding: 0.9rem 1.6rem;
+    border-radius: 20px;
+    background: var(--verde);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.aviso.erro{
+    background: #c0392b;
+}
+
+.aviso.mostrar{
+    transform: translate(-50%, 0);
+}
+
+@media (max-width: 900px){
+    .termo-layout{
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px){
+    .opcoes{
+        grid-template-columns: 1fr;
+    }
+
+    .dados-termo > div{
+        padding: 0 0.9rem;
+    }
+}
+
+/* ================= RESPONSIVO ================= */
+
+/* ---------- Tablet (até 900px) ---------- */
+@media (max-width: 900px){
+
+    .logo-titulo img{
+        margin-left: 2rem;
+    }
+
+    .navegacao{
+        gap: 1.2rem;
+    }
+
+    .secao{
+        padding: 3rem;
+    }
+
+    .rodape{
+        padding: 2.5rem 3rem;
+    }
+}
+
+/* ---------- Celular (até 600px) ---------- */
+@media (max-width: 600px){
+
+    body::before{
+        background-position: 75% center;
+    }
+
+    body::after{
+        background: rgba(0, 0, 0, 0.78);
+    }
+
+    .nave-bar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .logo-titulo img{
+        margin-left: 0;
+    }
+
+    .navegacao{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.9rem 1.4rem;
+    }
+
+    /* o botão Cadastre-se volta para o fluxo normal */
+    .navegacao .btn-nav{
+        position: static;
+        transform: none;
+    }
+
+    .secao{
+        padding: 2.5rem 1.5rem;
+    }
+
+    .painel{
+        padding: 1.5rem;
+    }
+
+    .rodape{
+        padding: 2rem 1.5rem;
+    }
+
+    .rodape-colunas{
+        flex-direction: column;
+    }
+
+    .rodape-colunas > div{
+        padding: 1.2rem 0 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .rodape-colunas > div:first-child{
+        padding-top: 0;
+        border-top: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        transition: none !important;
+    }
+}
+
+/* seletor do frasco e acesso da equipe */
+.opcao select, .opcao input[type="password"]{ width:100%; padding:12px 14px; margin-bottom:12px; border-radius:10px; border:1px solid var(--borda-vidro); background:rgba(255,255,255,.06); color:#fff; font:inherit; }
+.opcao select option{ color:#000; }
+.vazio-termo{ color:var(--amarelo-claro); font-size:.9rem; margin:0 0 12px; }
+.assinatura-salva{ background:#fff; border-radius:10px; max-width:100%; }

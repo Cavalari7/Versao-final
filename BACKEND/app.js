@@ -10,7 +10,7 @@ import rastreio, { exigirAdmin, registrarAgendamentoCriado, codigo } from "./ras
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: "600kb" })); // a assinatura do termo vai como imagem PNG
 app.use(cors());
 app.use("/api", auth); // contas de usuário
 app.use("/api", rastreio); // Rastreio e Monitoramento

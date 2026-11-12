@@ -52,6 +52,11 @@ export async function ensureSchema() {
             local TEXT NULL, responsavel TEXT NULL, obs TEXT NULL
         );
         CREATE INDEX IF NOT EXISTS ix_mov_ag ON movimentacoes (agendamento_id);
+        CREATE TABLE IF NOT EXISTS termos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, agendamento_id INTEGER NOT NULL UNIQUE,
+            tipo TEXT NOT NULL, nome_responsavel TEXT NOT NULL, assinatura TEXT NULL,
+            registrado_por TEXT NULL, criado_em TEXT NOT NULL DEFAULT ${LOCAL}
+        );
         CREATE TABLE IF NOT EXISTS localizacoes (
             id INTEGER PRIMARY KEY AUTOINCREMENT, agendamento_id INTEGER NOT NULL,
             lat REAL NOT NULL, lng REAL NOT NULL, precisao_m INTEGER NULL,

@@ -125,6 +125,40 @@ r.post("/frascos/:id/movimentacoes", exigirAdmin, async (req, res) => {
     res.status(201).json({ sucesso: true });
 });
 
+// Termo de responsabilidade: registra o aceite (assinatura na tela ou aceite digital) e já marca o frasco como ENTREGUE. Só a equipe.
+r.post("/frascos/:id/termo", exigirAdmin, async (req, res) => {
+    const m = ID_RE.exec(String(req.params.id).toUpperCase());
+    if (!m) return res.status(400).json({ mensagem: "ID inválido." });
+    const id = parseInt(m[1], 10);
+    const tipo = String(req.body?.tipo || "").toUpperCase();
+    const nome = txt(req.body?.nome, 120);
+    const assinatura = String(req.body?.assinatura || "");
+    if (!["ASSINATURA", "ACEITE"].includes(tipo)) return res.status(400).json({ mensagem: "Tipo de aceite inválido." });
+    if (nome.length < 2) return res.status(400).json({ mensagem: "Informe o nome do responsável." });
+    if (tipo === "ASSINATURA" && (!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(assinatura) || assinatura.length > 400000))
+        return res.status(400).json({ mensagem: "Assinatura ausente ou inválida." });
+    const d = await carregar(id);
+    if (!d) return res.status(404).json({ mensagem: "Frasco não encontrado." });
+    const atual = d.movs.length ? d.movs[d.movs.length - 1].status : null;
+    if (atual !== "AGENDADA") return res.status(409).json({ mensagem: "O termo só pode ser aceito logo após o agendamento (frasco ainda não entregue)." });
+    const quem = txt(req.get("x-responsavel"), 80) || "Equipe Bio Óleo";
+    await pool.execute("INSERT INTO termos (agendamento_id, tipo, nome_responsavel, assinatura, registrado_por) VALUES (?, ?, ?, ?, ?)",
+        [id, tipo, nome, tipo === "ASSINATURA" ? assinatura : null, quem]);
+    const local = d.a.endereco || `${d.a.rua}, ${d.a.casa} - ${d.a.bairro}`;
+    await pool.execute("INSERT INTO movimentacoes (agendamento_id, status, local, responsavel, obs) VALUES (?, 'ENTREGUE', ?, ?, ?)",
+        [id, local, quem, `Termo de responsabilidade aceito (${tipo === "ASSINATURA" ? "assinatura" : "aceite digital"}) por ${nome}`]);
+    res.status(201).json({ sucesso: true, id: codigo(id) });
+});
+
+// Consulta o termo aceito (inclui a imagem da assinatura). Só a equipe.
+r.get("/admin/frascos/:id/termo", exigirAdmin, async (req, res) => {
+    const m = ID_RE.exec(String(req.params.id).toUpperCase());
+    if (!m) return res.status(400).json({ mensagem: "ID inválido." });
+    const [[t]] = await pool.query("SELECT tipo, nome_responsavel, assinatura, registrado_por, criado_em FROM termos WHERE agendamento_id = ?", [parseInt(m[1], 10)]);
+    if (!t) return res.status(404).json({ mensagem: "Nenhum termo registrado para este frasco." });
+    res.json({ tipo: t.tipo, nome: t.nome_responsavel, assinatura: t.assinatura, registradoPor: t.registrado_por, dataHora: iso(t.criado_em) });
+});
+
 // Registra a posição informada por um coletor autorizado.
 r.post("/frascos/:id/localizacoes", exigirAdmin, async (req, res) => {
     const m = ID_RE.exec(String(req.params.id).toUpperCase());

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termo de Responsabilidade | Bio-Óleo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/termo.css">
+</head>
+<body>
+  <header class="nave-bar">
+    <a href="/#/inicio" class="logo-titulo">
+      <img src="/imgs/3d_green_gradient_recycle_sign-Photoroom.png" alt="Símbolo de reciclagem">
+      <h1>BIO-ÓLEO</h1>
+    </a>
+    <nav class="navegacao">
+      <a href="/#/inicio">INICIO</a>
+      <a href="/sobre.html">SOBRE</a>
+      <a href="/rastreio/rastreio.html">RASTREIO</a>
+      <a href="/termo.html"><span>TERMO</span></a>
+      <a href="/#/empresa" class="btn-nav">Painel da equipe 🡪</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="secao" id="termo">
+      <div class="termo-layout">
+        <div class="termo-texto">
+          <span class="selo">Entrega do frasco</span>
+          <h2>Termo de<br>Responsabilidade</h2>
+          <p>Formalização da guarda e coleta segura dos resíduos. Ao confirmar, o frasco passa para "Entregue" no rastreio.</p>
+          <h4>Duas opções de aceite:</h4>
+          <ul class="lista">
+            <li>Assinatura direta na tela do dispositivo.</li>
+            <li>Aceite digital dos termos de guarda.</li>
+          </ul>
+        </div>
+
+        <div class="painel termo">
+          <p class="app-nome">App do motorista · Entrega do frasco</p>
+          <h3>Termo de <span>Responsabilidade</span></h3>
+
+          <div class="opcao" id="blocoChave" hidden>
+            <label for="chave">Chave da equipe</label>
+            <input id="chave" type="password" placeholder="Chave de acesso" autocomplete="off">
+            <button type="button" class="btn-amarelo" id="entrar">Entrar</button>
+          </div>
+
+          <div id="blocoTermo" hidden>
+            <label class="rotulo" for="frasco">Frasco a entregar</label>
+            <div class="opcao" style="margin-bottom:12px">
+              <select id="frasco" aria-label="Frasco a entregar"></select>
+              <p class="vazio-termo" id="vazio" hidden>Nenhum frasco aguardando entrega. Faça um agendamento primeiro.</p>
+            </div>
+
+            <div class="dados-termo">
+              <div><span class="rotulo">Frasco</span><strong id="dFrasco">—</strong></div>
+              <div><span class="rotulo">Local</span><strong id="dLocal">—</strong></div>
+              <div><span class="rotulo">Data e hora previstas</span><strong id="dData">—</strong></div>
+            </div>
+
+            <div class="opcoes" id="opcoes">
+              <form class="opcao" id="formAssinatura">
+                <span class="etiqueta">Opção 1 · Assinatura</span>
+                <p>O responsável assina na tela ao receber o frasco.</p>
+                <div class="assinatura">
+                  <canvas id="assinatura"></canvas>
+                  <span class="linha-assinatura"></span>
+                  <small>Assine acima da linha</small>
+                </div>
+                <label for="nomeAssinatura">Nome do responsável</label>
+                <input id="nomeAssinatura" type="text" placeholder="Nome completo" autocomplete="name">
+                <div class="botoes">
+                  <button type="button" class="btn-vidro" id="limpar">Limpar</button>
+                  <button type="submit" class="btn-amarelo">Confirmar entrega</button>
+                </div>
+              </form>
+
+              <form class="opcao" id="formAceite">
+                <span class="etiqueta">Opção 2 · Aceite dos termos</span>
+                <p>O responsável lê o termo e marca que concorda.</p>
+                <div class="termos-texto">
+                  <strong>Termo de guarda do frasco</strong>
+                  Declaro que recebi o frasco <b id="tFrasco">—</b> e me responsabilizo por sua guarda e conservação até a coleta pela Bio Óleo Brasil. Comprometo-me a mantê-lo tampado, em local seguro, e a depositar nele apenas óleo de cozinha usado.
+                </div>
+                <label class="concordo" for="concordo">
+                  <input id="concordo" type="checkbox">
+                  Li e concordo com os termos
+                </label>
+                <label for="nomeAceite">Nome do responsável</label>
+                <input id="nomeAceite" type="text" placeholder="Nome completo" autocomplete="name">
+                <div class="botoes">
+                  <button type="submit" class="btn-amarelo">Confirmar entrega</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape" id="contato">
+    <div class="rodape-colunas">
+      <div><h4>Telefone</h4><p>(44) 99977-7632</p></div>
+      <div><h4>Endereço</h4><p>Rodovia PR-323, Lote 4, Gleba São Januário, Cianorte - PR</p></div>
+    </div>
+  </footer>
+
+  <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+  <script src="/rastreio/config.js"></script>
+  <script src="/termo.js"></script>
+</body>
+</html>

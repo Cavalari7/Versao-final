@@ -69,7 +69,7 @@ export default function PainelEmpresa() {
       <Cabecalho ativo="empresa" />
       <main className="bo-wrap">
         <h1 className="ag-title">Painel da empresa</h1>
-        <p className="ag-subtitle">Acompanhe os agendamentos, registre entregas e marque as coletas. <a className="bo-link" href="/rastreio/entregador.html">Abrir o app do entregador</a></p>
+        <p className="ag-subtitle">Acompanhe os agendamentos, registre entregas e marque as coletas. <a className="bo-link" href="/rastreio/entregador.html">Abrir o app do entregador</a> · <a className="bo-link" href="/termo.html">Entrega com termo de responsabilidade</a></p>
         {!lista ? (
           <form className="bo-busca" onSubmit={entrar}>
             <input className="ag-input" type="password" placeholder="Chave de acesso da equipe" value={chave} onChange={(e) => setChave(e.target.value)} aria-label="Chave de acesso" />
