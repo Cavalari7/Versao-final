@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_cadastro.css">
+    <title>Cadastro Bio-Óleo</title>
+</head>
+<body>
+  <!--Nav Bar-->
+    <nav class="nave-bar">
+    <div class="logo-titulo">
+        <img src="imgs/3d_green_gradient_recycle_sign-Photoroom.png" alt="">
+        <h1>BIO-ÓLEO</h1>
+    </div>
+        
+        <div class="navegacao">
+            <a href="tela_abertura/tela_inicial.html">INICIO</a>
+            <a href="tela_sobre.html">SOBRE</a>
+            <a href=""><span>CADASTRO</span></a>
+        </div>
+    </nav>
+    <!--Fim da Nav Bar-->
+
+    <!--Card Login-->
+    <div class="card-login">
+        <div>
+            <img src="imgs/gota-logo.png" alt="">
+            <h1>Bem Vindo!</h1>
+            <p>Insira as Creendencias</p>
+            <form action="">
+                <input id="email" type="email" placeholder="Seu email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}" required>
+                <input id="senha"  type="password" placeholder="Digite sua senha" required required minlength="8"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                <button>Cadastrar</button>
+            </form>
+            <p>Possue Cadastro? <a href="login.html">Sing in</a></p>
+        </div>
+    </div>
+  <!--Fim do Card Login-->
+
+<script>
+  const senha = document.getElementById("senha");
+
+  senha.addEventListener("invalid", () => {
+    if (senha.validity.valueMissing) {
+      senha.setCustomValidity("Digite sua senha.");
+    } else if (senha.validity.tooShort) {
+      senha.setCustomValidity("A senha precisa ter pelo menos 8 caracteres.");
+    } else {
+      senha.setCustomValidity("A senha não atende aos requisitos.");
+    }
+  });
+
+  senha.addEventListener("input", () => {
+    senha.setCustomValidity("");
+  });
+
+  const email = document.getElementById("email");
+
+  email.addEventListener("invalid", () => {
+    email.setCustomValidity("Por favor, digite um e-mail válido.");
+  });
+
+  email.addEventListener("input", () => {
+    email.setCustomValidity("");
+  });
+</script>
+</body>
+</html>

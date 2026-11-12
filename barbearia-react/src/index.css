@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background: #000;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: none;
+  text-align: left;
+}

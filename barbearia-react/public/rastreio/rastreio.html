@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="img/logo.png">
+<title>Rastreio e Monitoramento | Bio Óleo / Brasil</title>
+<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/rastreio.css">
+</head>
+<body>
+<header class="topo">
+  <a class="marca" href="/" aria-label="Bio Óleo / Brasil — início">
+    <img src="img/logo.png" alt="" height="40" onerror="this.remove()">
+    <span>BIO ÓLEO / <b>BRASIL</b></span>
+  </a>
+  <nav class="topo-nav" aria-label="Navegação"><a href="/#/agendar">Agendar</a><a href="/#/minhas-coletas">Minhas coletas</a></nav>
+</header>
+
+<main class="pagina">
+  <h1>Rastreio e Monitoramento</h1>
+  <p class="intro">Acompanhe a movimentação dos frascos de óleo, do agendamento até a coleta final.</p>
+  <p id="aviso-demo" class="aviso" hidden>Dados de demonstração: nenhum registro abaixo é real. IDs para testar: BO-00003, BO-00005, BO-00007.</p>
+
+  <form id="busca" class="busca" role="search">
+    <label for="busca-id" class="sr">ID do frasco</label>
+    <input id="busca-id" name="id" placeholder="BO-00003" autocomplete="off" maxlength="12" inputmode="text">
+    <button type="submit" class="btn btn-ouro">Consultar frasco</button>
+    <button type="button" id="btn-ler" class="btn">Ler QR Code</button>
+  </form>
+
+  <p id="estado" class="estado" role="status" aria-live="polite"></p>
+
+  <div id="resultado" hidden>
+    <div class="grade">
+      <section class="card" aria-labelledby="t-status">
+        <h2 id="t-status">Status em tempo real</h2>
+        <p class="mut">ID do frasco</p>
+        <p class="id">ID <span id="f-id"></span></p>
+        <div id="f-status" class="barra-status"><span>Status atual</span><strong id="f-status-txt"></strong></div>
+        <dl class="dados">
+          <div data-priv><dt>Cliente</dt><dd id="f-cliente"></dd></div>
+          <div data-priv><dt>Pedido</dt><dd id="f-pedido"></dd></div>
+          <div data-priv><dt>Volume previsto</dt><dd id="f-litros"></dd></div>
+          <div data-priv><dt>Bairro</dt><dd id="f-bairro"></dd></div>
+          <div><dt>Última atualização</dt><dd id="f-atualizado"></dd></div>
+          <div data-priv><dt>Responsável</dt><dd id="f-resp"></dd></div>
+        </dl>
+        <h3>Histórico de movimentação</h3>
+        <ol id="linha" class="linha"></ol>
+        <p id="linha-vazia" class="mut" hidden>Este frasco ainda não tem movimentações registradas.</p>
+      </section>
+
+      <section class="card" aria-labelledby="t-qr">
+        <h2 id="t-qr">Identificação única</h2>
+        <p class="mut">Escaneie o código para abrir o rastreio deste frasco. O QR Code guarda apenas o endereço de consulta, sem dados pessoais.</p>
+        <div id="qr" class="qr" aria-label="QR Code do frasco"></div>
+        <p class="qr-id" id="qr-id"></p>
+        <p class="mut" id="qr-aviso" role="note" hidden></p>
+        <div class="acoes">
+          <button type="button" id="qr-ampliar" class="btn">Ampliar</button>
+          <button type="button" id="qr-baixar" class="btn">Baixar</button>
+          <button type="button" id="qr-imprimir" class="btn">Imprimir</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="grade" data-priv>
+      <section class="card" aria-labelledby="t-carga">
+        <h2 id="t-carga">Informações da carga</h2>
+        <dl class="dados">
+          <div><dt>Previsto</dt><dd id="c-prev"></dd></div>
+          <div><dt>Coletado</dt><dd id="c-col"></dd></div>
+          <div><dt>Diferença</dt><dd id="c-dif"></dd></div>
+          <div><dt>Endereço de origem</dt><dd id="c-end"></dd></div>
+        </dl>
+      </section>
+
+      <section class="card" aria-labelledby="t-mapa">
+        <h2 id="t-mapa">Mapa <span id="loc-estado" class="selo"></span></h2>
+        <div class="mapa-wrap">
+          <div id="mapa" role="region" aria-label="Mapa da localização registrada"></div>
+          <p id="mapa-vazio" class="mapa-vazio">Ainda não há local no mapa para este frasco.</p>
+        </div>
+        <p id="mapa-aviso" class="aviso-mapa" role="status"></p>
+        <dl id="rota-dados" class="dados" hidden>
+          <div><dt id="r-rotulo">Rota</dt><dd id="r-dist"></dd></div>
+          <div><dt>Tempo estimado</dt><dd id="r-tempo"></dd></div>
+          <div><dt>Chegada prevista</dt><dd id="r-chegada"></dd></div>
+        </dl>
+        <p id="rota-nota" class="mut"></p>
+        <p id="loc-info" class="mut"></p>
+        <p class="mut legenda-mapa"><span class="pino pino-c">C</span> local da coleta &nbsp;·&nbsp; <span class="pino pino-b">B</span> base &nbsp;·&nbsp; <span class="pino pino-e"></span> equipe</p>
+        <div class="acoes" id="equipe" hidden>
+          <button type="button" id="btn-vivo" class="btn btn-ouro">Compartilhar posição ao vivo</button>
+          <button type="button" id="btn-destino" class="btn">Marcar local da coleta</button>
+        </div>
+        <p id="pos-msg" class="mut" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<dialog id="dlg-qr" class="dlg"><div id="qr-grande" class="qr qr-g"></div><p class="qr-id" id="qr-grande-id"></p><button class="btn" data-fechar>Fechar</button></dialog>
+<dialog id="dlg-leitor" class="dlg"><h2>Ler QR Code</h2><div id="leitor"></div><p id="leitor-msg" class="mut" role="status"></p><button class="btn" data-fechar>Cancelar</button></dialog>
+
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/qrcode.js"></script>
+<script src="lib/html5-qrcode.min.js"></script>
+<script src="config.js"></script>
+<script src="js/rastreio-rules.js"></script>
+<script src="js/rastreio-service.js"></script>
+<script src="js/rastreio-mapa.js"></script>
+<script src="js/rastreio-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Nunca envie chaves e senhas ao GitHub
+.env
+*.env
+!.env.example
+BACKEND/dados/
+*.db
+*.db-wal
+*.db-shm

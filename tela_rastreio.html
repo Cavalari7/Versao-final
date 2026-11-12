@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastreio | Bio-Óleo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style_rastreio.css">
+</head>
+<body>
+
+  <header class="nave-bar">
+    <a href="tela_inicial.html" class="logo-titulo">
+      <img src="imgs/simbolo-de-reciclagem.png" alt="Símbolo de reciclagem">
+      <h1>BIO-ÓLEO</h1>
+    </a>
+
+    <nav class="navegacao">
+      <a href="tela_inicial.html">INICIO</a>
+      <a href="tela_sobre.html">SOBRE</a>
+      <a href="tela_rastreio.html"><span>RASTREIO</span></a>
+      <a href="tela_termo.html">TERMO</a>
+      <a href="tela_cadastro.html" class="btn-nav">Cadastre-se  🡪</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Rastreio e Monitoramento ===== -->
+    <section class="secao" id="rastreio">
+      <h3 class="titulo">Rastreio e Monitoramento</h3>
+
+      <div class="duas-colunas">
+
+        <!-- Status em tempo real -->
+        <div class="painel">
+          <h4>Status em Tempo Real</h4>
+          <p>Acompanhe cada etapa do processo, desde o agendamento até a coleta final.</p>
+
+          <div class="frasco">
+            <div class="frasco-topo">
+              <div>
+                <span class="rotulo">Rastreio do frasco</span>
+                <p class="frasco-id">ID <strong>BO-00003</strong></p>
+              </div>
+
+              <div class="qr-caixa">
+                <canvas id="qr" width="29" height="29"></canvas>
+                <span>Escaneie o QR Code</span>
+              </div>
+            </div>
+
+            <div class="status-atual" id="statusAtual">
+              <span>Status atual</span>
+              <strong id="statusTexto">COLETADO</strong>
+            </div>
+
+            <div class="dados-frasco">
+              <div><span class="rotulo">Cliente</span><strong>[Cliente 5]</strong></div>
+              <div><span class="rotulo">Pedido</span><strong>#0004</strong></div>
+              <div><span class="rotulo">Volume</span><strong>15 L</strong></div>
+              <div><span class="rotulo">Bairro</span><strong>Bairro D</strong></div>
+            </div>
+
+            <div class="linha-tempo" id="linhaTempo">
+              <button type="button" class="etapa feita">
+                <span class="ponto"></span>
+                <strong>Frasco entregue</strong>
+                <small>07/10/2026 · 10:20<br>Rua [exemplo], 12 · Bairro D</small>
+              </button>
+              <button type="button" class="etapa feita">
+                <span class="ponto"></span>
+                <strong>Coleta agendada</strong>
+                <small>14/10/2026 · Manhã<br>Pedido #0004</small>
+              </button>
+              <button type="button" class="etapa feita">
+                <span class="ponto"></span>
+                <strong>Frasco coletado</strong>
+                <small>14/10/2026 · 09:05<br>Retirado pela equipe Bio Óleo</small>
+              </button>
+            </div>
+          </div>
+
+          <p class="dica">Clique nas etapas da linha do tempo para simular o andamento.</p>
+        </div>
+
+        <!-- Identificação única -->
+        <div class="painel">
+          <h4>Identificação Única</h4>
+          <p class="texto-painel">
+            Cada frasco possui um ID e um QR Code para validação rápida e segura no local.
+          </p>
+
+          <ul class="lista">
+            <li>Escaneamento direto pelo app</li>
+            <li>Identificação BO-00003</li>
+            <li>Histórico de movimentação</li>
+          </ul>
+
+          <div class="botoes">
+            <a href="tela_termo.html" class="btn-amarelo">Ver termo de responsabilidade</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape" id="contato">
+    <div class="rodape-colunas">
+      <div>
+        <h4>Telefone</h4>
+        <p>(44) 99977-7632</p>
+      </div>
+      <div>
+        <h4>Endereço</h4>
+        <p>Rodovia PR-323, Lote 4, Gleba São Januário, Cianorte - PR</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script_rastreio.js"></script>
+</body>
+</html>

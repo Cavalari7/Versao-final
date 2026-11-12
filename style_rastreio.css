@@ -1,0 +1,567 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    --branco: #fff;
+    --amrelo-principal: #F2B705;
+    --amarelo-claro: #ffd60a;
+    --verde: #2FA84F;
+    --ambar: #B8700A;
+    --vidro: rgba(12, 9, 0, 0.55);
+    --borda-vidro: rgba(255, 255, 255, 0.18);
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    color: var(--branco);
+    background: #000;
+}
+
+/* ===== FUNDO FIXO (a gota fica parada, o conteúdo rola) ===== */
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("imgs/bioleo-background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body::after{
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* ================= NAVE BAR ================= */
+.nave-bar{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.nave-bar span{
+    position: relative;
+    display: inline-block;
+}
+
+.nave-bar span::after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 9%;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--amrelo-principal);
+    border-radius: 2px;
+}
+
+.logo-titulo{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--branco);
+    text-decoration: none;
+}
+
+.logo-titulo h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.logo-titulo img{
+    width: 2rem;
+    margin-left: 4rem;
+}
+
+.navegacao{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navegacao a{
+    text-decoration: none;
+    color: var(--branco);
+    font-size: 0.9rem;
+}
+
+.navegacao a:last-child{
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: solid #fff 1px;
+    border-radius: 20px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 100;
+    transition: 0.3s;
+}
+
+.navegacao a:last-child:hover{
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    box-shadow: #fafafa 0px 0px 15px;
+}
+
+/* ================= SEÇÕES ================= */
+.secao{
+    padding: 3.5rem 6rem;
+    max-width: 78rem;
+}
+
+.titulo{
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.titulo::after{
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 4px;
+    margin-top: 0.8rem;
+    border-radius: 2px;
+    background: var(--amrelo-principal);
+}
+
+.secao p{
+    font-weight: 300;
+}
+
+/* ================= PAINEL DE VIDRO ================= */
+.painel{
+    background: var(--vidro);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--borda-vidro);
+    border-radius: 20px;
+    padding: 2rem 2.2rem;
+}
+
+.painel h4{
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+/* listas com marcador amarelo */
+.lista{
+    list-style: none;
+}
+
+.lista li{
+    position: relative;
+    padding-left: 1.4rem;
+    font-weight: 300;
+}
+
+.lista li + li{
+    margin-top: 0.7rem;
+}
+
+.lista li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amrelo-principal);
+}
+
+/* ================= BOTÕES ================= */
+.btn-amarelo{
+    text-decoration: none;
+    color: black;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 0.7rem 1.6rem;
+    border-radius: 20px;
+    border: #222222 solid 2px;
+    background: linear-gradient(90deg, #ffd60a 0%, #ffe66d 100%);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-amarelo:hover{
+    box-shadow: #F2B705 0px 0px 10px 5px;
+}
+
+.btn-vidro{
+    color: var(--branco);
+    font-family: inherit;
+    font-weight: 300;
+    padding: 0.7rem 1.6rem;
+    border-radius: 20px;
+    border: solid #fff 1px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-vidro:hover{
+    box-shadow: #fafafa 0px 0px 10px 5px;
+}
+
+/* ================= RODAPÉ ================= */
+.rodape{
+    padding: 3rem 6rem;
+    margin-top: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--borda-vidro);
+}
+
+.rodape-colunas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 0;
+}
+
+.rodape-colunas > div{
+    padding: 0 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.rodape-colunas > div:first-child{
+    padding-left: 0;
+    border-left: none;
+}
+
+.rodape h4{
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.rodape p{
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+/* ================= RASTREIO ================= */
+.duas-colunas{
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.texto-painel,
+.painel > p:not(.dica){
+    margin-bottom: 1.5rem;
+}
+
+.rotulo{
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+/* cartão do frasco */
+.frasco{
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--borda-vidro);
+    border-radius: 16px;
+    padding: 1.4rem;
+}
+
+.frasco-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.frasco-id{
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-top: 0.2rem;
+}
+
+.frasco-id strong{
+    color: var(--amarelo-claro);
+}
+
+/* QR */
+.qr-caixa{
+    width: 6.5rem;
+    flex: none;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid var(--borda-vidro);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.qr-caixa canvas{
+    display: block;
+    width: 100%;
+    padding: 0.25rem;
+    margin-bottom: 0.4rem;
+    border-radius: 4px;
+    background: #fff;
+    image-rendering: pixelated;
+}
+
+.qr-caixa span{
+    font-size: 0.55rem;
+    color: var(--amarelo-claro);
+    text-transform: uppercase;
+}
+
+/* status */
+.status-atual{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    background: var(--verde);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.status-atual strong{
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.status-atual.andamento{
+    background: var(--ambar);
+}
+
+.status-atual.aguardando{
+    background: #444;
+}
+
+.dados-frasco{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 1rem 0;
+    margin-bottom: 1.2rem;
+}
+
+.dados-frasco > div{
+    padding: 0 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.dados-frasco > div:first-child{
+    padding-left: 0;
+    border-left: none;
+}
+
+.dados-frasco strong{
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* linha do tempo */
+.linha-tempo{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.etapa{
+    position: relative;
+    text-align: left;
+    padding: 1rem 0 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    background: none;
+    color: var(--branco);
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.etapa strong{
+    display: block;
+    margin: 0.6rem 0 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.etapa small{
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 300;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+.ponto{
+    display: grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    background: #444;
+    color: #000;
+    font-size: 0.7rem;
+    transition: 0.3s;
+}
+
+.etapa.feita .ponto{
+    background: var(--amrelo-principal);
+}
+
+.etapa.feita .ponto::after{
+    content: "✓";
+}
+
+.etapa:last-child.feita .ponto{
+    background: var(--verde);
+}
+
+.dica{
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.botoes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 900px){
+    .duas-colunas{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px){
+    .frasco-id{
+        font-size: 1.5rem;
+    }
+
+    .linha-tempo{
+        grid-template-columns: 1fr;
+    }
+
+    .dados-frasco > div{
+        padding: 0 0.8rem;
+    }
+}
+
+/* ================= RESPONSIVO ================= */
+
+/* ---------- Tablet (até 900px) ---------- */
+@media (max-width: 900px){
+
+    .logo-titulo img{
+        margin-left: 2rem;
+    }
+
+    .navegacao{
+        gap: 1.2rem;
+    }
+
+    .secao{
+        padding: 3rem;
+    }
+
+    .rodape{
+        padding: 2.5rem 3rem;
+    }
+}
+
+/* ---------- Celular (até 600px) ---------- */
+@media (max-width: 600px){
+
+    body::before{
+        background-position: 75% center;
+    }
+
+    body::after{
+        background: rgba(0, 0, 0, 0.78);
+    }
+
+    .nave-bar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .logo-titulo img{
+        margin-left: 0;
+    }
+
+    .navegacao{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.9rem 1.4rem;
+    }
+
+    /* o botão Cadastre-se volta para o fluxo normal */
+    .navegacao .btn-nav{
+        position: static;
+        transform: none;
+    }
+
+    .secao{
+        padding: 2.5rem 1.5rem;
+    }
+
+    .painel{
+        padding: 1.5rem;
+    }
+
+    .rodape{
+        padding: 2rem 1.5rem;
+    }
+
+    .rodape-colunas{
+        flex-direction: column;
+    }
+
+    .rodape-colunas > div{
+        padding: 1.2rem 0 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.45);
+    }
+
+    .rodape-colunas > div:first-child{
+        padding-top: 0;
+        border-top: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        transition: none !important;
+    }
+}
